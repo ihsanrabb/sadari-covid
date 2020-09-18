@@ -1,0 +1,38 @@
+.symptoms_wrap {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: #D1E7E6;
+    padding: 1rem 0;
+    h3 {
+        margin: 0;
+    }
+    p {
+        margin: 0;
+    }
+    
+}
+
+.paper_wrap {
+    padding: .5rem 0 0 0;
+    height: 120px;
+    .title {
+        text-align: center;
+        font-size: 12px;
+    }
+    
+    .sub_title {
+        text-align: center;
+        font-size: 9px;
+        padding-left: .2rem;
+        padding-right: .2rem;
+    }
+    .center_img {
+        text-align: center;
+    }
+    .img_fever {
+        margin-top: 1rem;
+    }
+    .img_symptoms {
+        margin-top: 2rem;
+    }
+}

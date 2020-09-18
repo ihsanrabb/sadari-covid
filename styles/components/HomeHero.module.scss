@@ -1,0 +1,17 @@
+.hero_wrapper {
+    background-color: #D1E7E6;
+    border-radius: 4px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem 2rem;
+    h5 {
+        font-size: 15px;
+        margin: 0;
+    }
+    .img_wrap {
+        padding: 0 !important;
+        img {
+            width: 90%;
+        }
+    }
+}
