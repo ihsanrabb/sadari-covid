@@ -3,8 +3,11 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import styles from '../styles/components/HomeInfo.module.scss'
+import { useRouter } from 'next/router'
 
 const HomeInfo = () => {
+  const router = useRouter()
+
   return (
       <Container className={styles.container_wrap}>
         <h3>Informasi Sekitar Anda</h3>
@@ -19,7 +22,10 @@ const HomeInfo = () => {
             </Paper>
           </Grid>
           <Grid item xs={6}>
-            <Paper className={styles.paper_wrap}>
+            <Paper 
+              className={styles.paper_wrap} 
+              onClick={() => router.push('/hospital-reference')}
+            >
               <img src="/img/ic-hospital.svg" alt="location" />
               <p>Rumah Sakit Rujukan</p>
               <div className={styles.icon_right}>

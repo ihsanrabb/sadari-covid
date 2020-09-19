@@ -1,9 +1,12 @@
 import styles from '../styles/components/HomeHero.module.scss'
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid' 
+import Button from '@material-ui/core/Button'
+import Container from '@material-ui/core/Container'
+import { useRouter } from 'next/router'
 
 const HomeHero = () => {
+  const router = useRouter()
+
   return (
     <Container>
       <div className={styles.hero_wrapper}>
@@ -11,7 +14,11 @@ const HomeHero = () => {
         <Grid container spacing={1}>
           <Grid item xs={8} sm={6}>
             <p>Silahkan periksa kesehatan Anda jika ingin mengetahui kondisi tubuh Anda.</p>
-            <Button size="small" variant="contained">Diagnosa Mandiri</Button>
+            <Button 
+              size="small" 
+              variant="contained"
+              onClick={() => router.push('/diagnosis-page')}>
+            Diagnosa Mandiri</Button>
           </Grid>
           <Grid 
             item xs={4} sm={6} container
