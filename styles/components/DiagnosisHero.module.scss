@@ -1,0 +1,21 @@
+.hero {
+    width: 100%;
+}
+
+.wording_hero {
+    background-color: #EEF3FF;
+    border-radius: 40px 40px 0 0;
+    p {
+        text-align: center;
+        padding: 1rem 1.5rem;
+        margin: 0;
+    }
+}
+
+.wording_info {
+    background-color: #D1F8D2;
+    p {
+        font-size: 11px;
+        margin-top: .1rem;
+    }
+}
