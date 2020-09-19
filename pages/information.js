@@ -1,9 +1,10 @@
 import BottomNavigation from '../components/BottomNavigation'
+import InformationList from '../components/InformationList'
 
 const Information = () => {
   return (
     <>
-      informasi page
+      <InformationList />
       <BottomNavigation className="navigation-bottom" />
     </>
   )
