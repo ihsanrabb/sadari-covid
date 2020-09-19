@@ -25,6 +25,9 @@ const SimpleBottomNavigation = () => {
       case '/':
         setValue(0)
         break
+      case '/diagnosis-page':
+        setValue(1)
+        break
       case '/information':
         setValue(2)
         break
@@ -44,7 +47,8 @@ const SimpleBottomNavigation = () => {
         onClick={() => router.push('/')} />
       <BottomNavigationAction 
         label="Diagnosa Mandiri" 
-        icon={<FavoriteRoundedIcon />} />
+        icon={<FavoriteRoundedIcon />} 
+        onClick={() => router.push('/diagnosis-page')} />
       <BottomNavigationAction 
         label="Informasi" 
         icon={<HelpOutlineRoundedIcon />} 
