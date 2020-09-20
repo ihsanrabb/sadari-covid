@@ -1,16 +1,19 @@
 import Container from '@material-ui/core/Container'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
-import PhoneIcon from '@material-ui/icons/Phone';
-import Typography from '@material-ui/core/Typography';
-import MapIcon from '@material-ui/icons/Map';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import propTypes from 'prop-types';  
 import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import MuiDialogTitle from '@material-ui/core/DialogTitle';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   listWrap: {
@@ -19,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
   titleList: {
     margin: '0'
+  },
+  subTilte: {
+    margin: '0',
+    textDecoration: 'underline',
+    color: '#1E7AA2'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -88,9 +96,50 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const styles = (theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(2),
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
+  },
+});
+
+const DialogTitle = withStyles(styles)((props) => {
+  const { children, classes, onClose, ...other } = props;
+  return (
+    <MuiDialogTitle disableTypography className={classes.root} {...other}>
+      <Typography variant="subtitle1">{children}</Typography>
+      {onClose ? (
+        <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
+          <CloseIcon />
+        </IconButton>
+      ) : null}
+    </MuiDialogTitle>
+  );
+});
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
 const ConfirmedList = ({locationData}) => {
   const classes = useStyles();
   const [search, setSearch] = useState('')
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   let filteredLocation = locationData.data.filter((location) => {
     return location.provinsi.toLowerCase().indexOf(search.toLowerCase()) !== -1
@@ -127,7 +176,11 @@ const ConfirmedList = ({locationData}) => {
   return (
     <div className={classes.listWrap}>
       <Container>
+      <Grid container direction="row" justify="space-between" alignItems="center">
         <p className={classes.titleList}>Lokasi Area Provinsi</p>
+        <p className={classes.subTilte} onClick={handleClickOpen}>Pelajarin Level Zona</p>
+      </Grid>
+        
         <TextField 
           label="Cari Lokasi" 
           variant="filled" 
@@ -161,9 +214,49 @@ const ConfirmedList = ({locationData}) => {
           )
         })}
 
+      <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose}>
+          ARTI LEVEL ZONA TIAP AREA
+        </DialogTitle>
+        <DialogContent dividers>
+          <div className={classes.levelRed}>   
+            <p className={classes.zonaTitle}>Zona Merah</p>
+          </div>
+          <p className={classes.titleList}>Pada wilayah dengan zona merah, tingkat transmisi penyeberan virus corona Covid-19 sangat cepat. Ciri cirinya adalah:</p>
+          <ul className={classes.listDetail}>
+            <li>Terjadi transmisi lokal atau penyebaran virus corona antarwarga setempat di satu wilayah dengan cepat.</li>
+          </ul>
+          <div className={classes.levelOrange}>   
+            <p className={classes.zonaTitle}>Zona Orange</p>
+          </div>
+          <p className={classes.titleList}>Pada wilaya dengan zona oranye ini tingkat transmisi penyebaran corona Covid-19 masih tinggi.</p>
+          <ul className={classes.listDetail}>
+            <li>Kluster baru harus terpantau dan dikontrol melalui testing dan racing secara agresif</li>
+          </ul>
+          <div className={classes.levelYellow}>   
+            <p className={classes.zonaTitle}>Zona Kuning</p>
+          </div>
+          <p className={classes.titleList}> Pada wilayah dengan zona kuning:</p>
+          <ul className={classes.listDetail}>
+            <li>Kemungkinan terjadinya transmisi lokal masih cukup besar dan mungkin cepat. • Transmisi dari imported cases bisa terjadi cepat</li>
+          </ul>
+          <div className={classes.levelGreen}>   
+              <p className={classes.zonaTitle}>Zona Hijau</p>
+            </div>
+          <p className={classes.titleList}>Pada wilayah dengan status zona hijau memiliki ciri-ciri sebagai berikut</p>
+          <ul className={classes.listDetail}>
+            <li>Pengawasan ketat dan berkala dilakukan untuk mencegah timbulnya potensi kasus baru.</li>
+          </ul>
+        </DialogContent>
+      </Dialog>
+
       </Container>
     </div>
   )
+}
+
+propTypes.ConfirmedList = {
+  locationData: propTypes.object.isRequired
 }
 
 export default ConfirmedList
