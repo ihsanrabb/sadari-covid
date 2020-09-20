@@ -4,8 +4,10 @@ import Fab from '@material-ui/core/Fab';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container'
+import { useRouter } from 'next/router'
 
 const DiagnosisBox = () => {
+  const router = useRouter()
   const useStyles = makeStyles((theme) => ({
     margin: {
       margin: theme.spacing(1),
@@ -32,6 +34,7 @@ const DiagnosisBox = () => {
           color="secondary"
           aria-label="add"
           className={classes.margin}
+          onClick={() => router.push('/diagnosis-page/question')}
         >
           <KeyboardArrowRightIcon className={classes.extendedIcon} />
           Mulai Sekarang!
