@@ -13,7 +13,10 @@ const HomeInfo = () => {
         <h3>Informasi Sekitar Anda</h3>
         <Grid container spacing={2}>
           <Grid item xs={6}>
-            <Paper className={styles.paper_wrap}>
+            <Paper 
+              className={styles.paper_wrap}
+              onClick={() => router.push('/confirmed-location')}
+            >
               <img src="/img/ic-location.svg" alt="location" />
               <p>Zona Lokasi Area Berdampak</p>
               <div className={styles.icon_right}>
