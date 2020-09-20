@@ -1,6 +1,5 @@
 import ReferenceHero from '../components/ReferenceHero'
 import ReferenceList from '../components/ReferenceList'
-import RefernceList from '../components/ReferenceList'
 
 const HospitalReference = ({hospitalData}) => {
   return (
