@@ -30,7 +30,8 @@ export default function Home({casesData}) {
 
 export async function getServerSideProps() {
   
-  const res = await fetch(`https://covid19.mathdro.id/api/countries/Indonesia`)
+  // const res = await fetch(`https://covid19.mathdro.id/api/countries/Indonesia`)
+  const res = await fetch(`https://data.covid19.go.id/public/api/update.json`)
   const casesData = await res.json()
 
   return {
