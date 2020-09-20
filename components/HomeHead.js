@@ -8,8 +8,12 @@ const HomeHead = () => {
   const [cityLoc, setCityLoc] = useState('')
 
   useEffect(() => {
-    getCoordintes()
-  });
+    let mounted = true
+    if(mounted) {
+      getCoordintes()
+    }
+    return () => mounted = false
+  }, [cityLoc]);
 
   function getCoordintes() { 
     let options = { 
