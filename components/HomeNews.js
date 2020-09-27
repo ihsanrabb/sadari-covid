@@ -6,6 +6,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import { useEffect, useState } from 'react'
+import { db } from '../firebase'
+import Link from 'next/link'
 
 const useStyles = makeStyles({
   root: {
@@ -20,7 +23,6 @@ const useStyles = makeStyles({
 
 const HomeNews = () => {
   const classes = useStyles();
-
   const settings = {
     dots: true,
     infinite: true,
@@ -28,96 +30,57 @@ const HomeNews = () => {
     slidesToShow: 2,
     slidesToScroll: 2
   };
+  const [newsList, setNewsList] = useState([])
+
+  useEffect(() => {
+    db.collection("news").orderBy("date", "desc").limit(4).get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        let data = {
+          title: doc.data().title,
+          date: doc.data().date.toDate(),
+          description: doc.data().description,
+          imageURL: doc.data().imageURL
+        }
+        setNewsList(prevList => [...prevList, {
+          id:doc.id,
+          data:data
+        }])
+      });
+    });
+  }, [])
 
   return (
     <Container className={classes.containerNews}>
       <h3>Informasi Terbaru</h3>
-      <Slider {...settings}>
-          <div>
-            <Card className={classes.root}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="120"
-                  image="/img/dummy-covid.jpg"
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h5">
-                    Covid 19 1
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000 species
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.root}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="120"
-                  image="/img/dummy-covid.jpg"
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Covid 19 2
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000 species
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.root}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="120"
-                  image="/img/dummy-covid.jpg"
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Covid 19 3
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000 species
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </div>
-          <div>
-            <Card className={classes.root}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  height="120"
-                  image="/img/dummy-covid.jpg"
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    Covid 19 4
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000 species
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </div>
+      {newsList !== [] && 
+        <Slider {...settings}>
+          {newsList.map((news) => (
+            <div key={news.id}>
+              <Link href={`/information/[id]`} as={`/information/${news.id}`}>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      alt="Contemplative Reptile"
+                      height="120"
+                      image={news.data.imageURL}
+                      title="Contemplative Reptile"
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="subtitle1" component="h5">
+                        {news.data.title}
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        {news.data.description}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Link>
+            </div>
+          ))}
         </Slider>
+      }
     </Container>
   )
 }
