@@ -78,8 +78,6 @@ const ReferenceList = ({hospitalData}) => {
     }, {})  
 
     setLocalHospital(groupHospital['Jawa Tengah'])
-    console.log('grouping', groupHospital)
-    // console.log('pilihan', groupHospital[''])
   }, [])
 
   let filteredHospital = localHospital.filter((hospital) => {
