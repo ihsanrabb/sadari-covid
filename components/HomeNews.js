@@ -38,6 +38,7 @@ const HomeNews = () => {
         let data = {
           title: doc.data().title,
           date: doc.data().date.toDate(),
+          sub_description: doc.data().sub_description,
           description: doc.data().description,
           imageURL: doc.data().imageURL
         }
@@ -71,7 +72,7 @@ const HomeNews = () => {
                         {news.data.title}
                       </Typography>
                       <Typography variant="body2" color="textSecondary" component="p">
-                        {news.data.description}
+                        {news.data.sub_description}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
