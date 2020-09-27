@@ -1,5 +1,5 @@
-import BottomNavigation from '../components/BottomNavigation'
-import InformationList from '../components/InformationList'
+import BottomNavigation from '../../components/BottomNavigation'
+import InformationList from '../../components/InformationList'
 
 const Information = () => {
   return (
