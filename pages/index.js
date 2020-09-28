@@ -9,7 +9,8 @@ import HomeSymptoms from '../components/HomeSymptoms'
 import HomeNews from '../components/HomeNews'
 
 
-export default function Home({casesData}) {
+export default function Home({casesData, error}) {
+
   return (
     <>
       <Head>
@@ -30,12 +31,14 @@ export default function Home({casesData}) {
 
 export async function getServerSideProps() {
   
-  const res = await fetch(`https://covid19.mathdro.id/api/countries/Indonesia`)
+  const res = await fetch(`https://data.covid19.go.id/public/api/update.json`)
+  const errorCode = res.ok ? false : res.status
   const casesData = await res.json()
 
   return {
     props: {
-      casesData: casesData
+      casesData: casesData,
+      error: { code: errorCode, message: res.statusText }
     }
   }
 }

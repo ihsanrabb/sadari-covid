@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from '../src/theme';
+import Head from 'next/head'
+import "nprogress/nprogress.css";
+import Router from 'next/router';
+import NProgress from "nprogress"
 
-export default function MyApp(props) {
-  const { Component, pageProps } = props;
+Router.onRouteChangeStart = () =>  NProgress.start() 
+Router.onRouteChangeComplete = () => NProgress.done()
+Router.onRouteChangeError = () => NProgress.done()
 
-  React.useEffect(() => {
-    // Remove the server-side injected CSS.
+export default function MyApp({Component, pageProps}) {
+  useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
@@ -16,13 +21,16 @@ export default function MyApp(props) {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        <Head>
+          <title>SADARI | Covid 19</title>  
+        </Head>
         <CssBaseline />
+       
         <Component {...pageProps} />
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 }
 
