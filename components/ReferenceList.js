@@ -10,6 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import MapIcon from '@material-ui/icons/Map';
 import { useState, useEffect } from 'react';
 import propTypes from 'prop-types';  
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const useStyles = makeStyles((theme) => ({
   listWrap: {
@@ -57,6 +61,10 @@ const useStyles = makeStyles((theme) => ({
   },
   iconStyle: {
     marginRight: '.5rem'
+  },
+  formControl: {
+    minWidth: '100%',
+    marginTop: '1rem',
   }
 }))
 
@@ -65,11 +73,8 @@ const ReferenceList = ({hospitalData}) => {
   const [expanded, setExpanded] = useState(false);
   const [localHospital, setLocalHospital] = useState([])
   const [search, setSearch] = useState('')
-
-  const handleChange = (panel) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
-  // console.log('komponen', hospitalData)
+  const [selectedProv, setSelectedProv] = useState('DKI Jakarta');
+  const [hospitalProperty, setHospitalProperty] = useState([])
 
   useEffect(() => {
     let groupHospital = hospitalData.reduce((newObject,hospital)=> {
@@ -77,8 +82,13 @@ const ReferenceList = ({hospitalData}) => {
       return newObject
     }, {})  
 
-    setLocalHospital(groupHospital['Jawa Tengah'])
-  }, [])
+    setHospitalProperty(Object.getOwnPropertyNames(groupHospital))
+    setLocalHospital(groupHospital[selectedProv])
+  }, [selectedProv])
+
+  const handleChangeProv = (e) => {
+    setSelectedProv(e.target.value);
+  }
 
   let filteredHospital = localHospital.filter((hospital) => {
     return hospital.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
@@ -88,12 +98,30 @@ const ReferenceList = ({hospitalData}) => {
     <div className={classes.listWrap}>
       <Container>
         <p className={classes.titleList}>Rumah Sakit</p>
+
+        <FormControl variant="filled" className={classes.formControl}>
+          <InputLabel id="demo-simple-select-outlined-label">Pilih Provinsi</InputLabel>
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            value={selectedProv}
+            onChange={handleChangeProv}
+          >
+            <MenuItem value="DKI Jakarta" disabled>
+              <em>Pilih Provinsi</em>
+            </MenuItem>
+            {hospitalProperty.map((item,index) => (
+              <MenuItem value={item} key={index}>{item}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
         <TextField 
           label="Cari Rumah Sakit" 
           variant="filled" 
           className={classes.searchField} 
           onChange={e => setSearch(e.target.value)} 
-          value={search} />
+          value={search} 
+        />
 
         {filteredHospital.map((hospital, index) => {
           return (
@@ -109,9 +137,11 @@ const ReferenceList = ({hospitalData}) => {
                 <Typography className={classes.iconWrap} >
                   <MapIcon className={classes.iconStyle} /> Alamat: {hospital.address}
                 </Typography>
-                <Typography className={classes.iconWrap} >
-                <a href={`tel:${hospital.phone}`}><PhoneIcon className={classes.iconStyle} /> Hubungi : {hospital.phone}</a>
-                </Typography>
+                {hospital.phone && 
+                  <Typography className={classes.iconWrap} >
+                    <a href={`tel:${hospital.phone}`}><PhoneIcon className={classes.iconStyle} /> Hubungi : {hospital.phone}</a>
+                  </Typography>
+                }
               </AccordionDetails>
             </Accordion>
           )
