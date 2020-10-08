@@ -18,3 +18,9 @@ a {
 .text-right {
   text-align: right;
 }
+
+.text-center {
+  text-align: center !important;
+  display: flex !important;
+  justify-content: center !important;
+}
