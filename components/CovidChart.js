@@ -30,7 +30,6 @@ const CovidChart = () => {
   useEffect(() => {
     axios.get('https://cors-anywhere.herokuapp.com/https://data.covid19.go.id/public/api/update.json')
       .then((res) => {
-        console.log(res.data.update.penambahan)
         let update_data = res.data.update.penambahan
         let update_total = res.data.update.total
         filterNumber(setConfirmed, update_data.jumlah_positif)
