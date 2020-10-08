@@ -12,6 +12,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Slide from '@material-ui/core/Slide';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Alert from '@material-ui/lab/Alert';
+import Fade from '@material-ui/core/Fade';
 
 const QuestionPage = () => {
   const theme = useTheme();
@@ -24,6 +27,8 @@ const QuestionPage = () => {
     question5: ""
   });
   const [checked, setChecked] = useState(true);
+  const [error, setError] = useState(false);
+  const [finish, setFinish] = useState(false)
 
   const handleAnswer = e => {
     const {name, value} = e.target;
@@ -33,10 +38,46 @@ const QuestionPage = () => {
     }))
   }
 
+  const onNext = () => {
+    switch(activeStep + 1) {
+      case 1:
+        if(!answer.question1){
+          setError(true)
+        } else {
+          handleNext()
+        }
+        break;
+      case 2:
+        if(!answer.question2){
+          setError(true)
+        } else {
+          handleNext()
+        }
+        break;
+      case 3:
+        if(!answer.question3){
+          setError(true)
+        } else {
+          handleNext()
+        }
+        break;
+      case 4:
+        if(!answer.question4){
+          setError(true)
+        } else {
+          handleNext()
+        }
+        break;
+      default:
+        setError(false)
+    }
+  };
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     handleAnimation()
-  };
+    setError(false)
+  }
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -44,7 +85,13 @@ const QuestionPage = () => {
   };
 
   const handleSubmit = () => {
-    console.log('submit', answer)
+    if(!answer.question5){
+      setError(true)
+    } else {
+      setError(false)
+      setFinish(true)
+      console.log('submit', answer)
+    }
   }
 
   function handleAnimation() {
@@ -60,11 +107,12 @@ const QuestionPage = () => {
         return (
           <div className={styles["question-wrap"]}>
             <h3>Apakah anda pernah bertemu dengan pasien positif COVID-19 (berada dalam satu ruangan yang sama / kontak dalam jarak 1 meter)?</h3>
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" error={error} >
               <RadioGroup aria-label="gender" name="question1" value={answer.question1} onChange={handleAnswer}>
                 <FormControlLabel value="1" control={<Radio />} label="Ya" />
                 <FormControlLabel value="2" control={<Radio />} label="Tidak/ Tidak Tahu" />
               </RadioGroup>
+              {error && <FormHelperText>Please select an option.</FormHelperText>}
             </FormControl>
           </div>
         )
@@ -72,11 +120,12 @@ const QuestionPage = () => {
         return (
           <div className={styles["question-wrap"]}>
             <h3>Apakah anda pernah berkunjung ke negara terjangkit/di area transmisi lokal COVID-19 dalam 14 hari?</h3>
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" error={error}>
               <RadioGroup aria-label="gender" name="question2" value={answer.question2} onChange={handleAnswer}>
                 <FormControlLabel value="1" control={<Radio />} label="Ya" />
                 <FormControlLabel value="2" control={<Radio />} label="Tidak" />
               </RadioGroup>
+              {error && <FormHelperText>Please select an option.</FormHelperText>}
             </FormControl>
           </div>
         )
@@ -84,11 +133,12 @@ const QuestionPage = () => {
         return (
           <div className={styles["question-wrap"]}>
             <h3>Saya pergi keluar rumah</h3>
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" error={error}>
               <RadioGroup aria-label="gender" name="question3" value={answer.question3} onChange={handleAnswer}>
                 <FormControlLabel value="1" control={<Radio />} label="Ya" />
                 <FormControlLabel value="2" control={<Radio />} label="Tidak" />
               </RadioGroup>
+              {error && <FormHelperText>Please select an option.</FormHelperText>}
             </FormControl>
           </div>
         )
@@ -96,11 +146,12 @@ const QuestionPage = () => {
         return (
           <div className={styles["question-wrap"]}>
             <h3>Saya menggunakan transportasi umum(transportasi online, angkot, bus, taksi, kereta)</h3>
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" error={error}>
               <RadioGroup aria-label="gender" name="question4" value={answer.question4} onChange={handleAnswer}>
                 <FormControlLabel value="1" control={<Radio />} label="Ya" />
                 <FormControlLabel value="2" control={<Radio />} label="Tidak" />
               </RadioGroup>
+              {error && <FormHelperText>Please select an option.</FormHelperText>}
             </FormControl>
           </div>
         )
@@ -108,11 +159,12 @@ const QuestionPage = () => {
         return (
           <div className={styles["question-wrap"]}>
             <h3>Saya memakai masker pada saat berkumpul dengan orang lain</h3>
-            <FormControl component="fieldset">
+            <FormControl component="fieldset" error={error}>
               <RadioGroup aria-label="gender" name="question5" value={answer.question5} onChange={handleAnswer}>
                 <FormControlLabel value="1" control={<Radio />} label="Ya" />
                 <FormControlLabel value="2" control={<Radio />} label="Tidak" />
               </RadioGroup>
+              {error && <FormHelperText>Please select an option.</FormHelperText>}
             </FormControl>
           </div>
         )  
@@ -132,7 +184,7 @@ const QuestionPage = () => {
         )
       default:
         return (
-          <Button size="small" onClick={handleNext} disabled={activeStep === 4}>
+          <Button size="small" onClick={onNext} disabled={activeStep === 4}>
             Next
             {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
           </Button>
@@ -143,6 +195,11 @@ const QuestionPage = () => {
   return (
     <Container>
       <QuestionHero />
+      {finish &&
+        <Fade in={finish} timeout={800, 1000}>
+          <Alert severity="warning">Diagnosa mandiri hanyalah sebuah simulasi.</Alert>
+        </Fade>
+      }
 
       <Slide direction="right" in={checked} mountOnEnter unmountOnExit>
         {getStepContent(activeStep)}
