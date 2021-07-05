@@ -1,11 +1,11 @@
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import { useRouter } from 'next/router'
-import React, { useState, useEffect } from 'react'
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +25,7 @@ const SimpleBottomNavigation = () => {
       case '/':
         setValue(0)
         break
-      case '/diagnosis-page':
+      case '/vaksin':
         setValue(1)
         break
       case '/information':
@@ -46,9 +46,9 @@ const SimpleBottomNavigation = () => {
         icon={<HomeRoundedIcon />} 
         onClick={() => router.push('/')} />
       <BottomNavigationAction 
-        label="Diagnosa Mandiri" 
-        icon={<FavoriteRoundedIcon />} 
-        onClick={() => router.push('/diagnosis-page')} />
+        label="Lokasi Vaksin" 
+        icon={<LocalHospitalIcon />} 
+        onClick={() => router.push('/vaksin')} />
       <BottomNavigationAction 
         label="Informasi" 
         icon={<HelpOutlineRoundedIcon />} 

@@ -21,7 +21,6 @@ export default function Home() {
       <HomeInfo />
       <HomeSymptoms />
       <HomeNews />
-      
       <BottomNavigation className="navigation-bottom" />
     </>
   )

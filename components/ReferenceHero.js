@@ -32,7 +32,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ReferenceHero = () => {
+const ReferenceHero = (props) => {
+  const {
+    wording = 'Rumah Sakit Rujukan'
+  } = props
   const classes = useStyles();
   const router = useRouter()
 
@@ -54,7 +57,7 @@ const ReferenceHero = () => {
       <div className={classes.wordingHero}>
         <Container>
           <div className={classes.pill}>
-            <h3 className={classes.pillTitle}>Rumah Sakit Rujukan</h3>
+            <h3 className={classes.pillTitle}>{wording}</h3>
           </div>
         </Container>
       </div>
