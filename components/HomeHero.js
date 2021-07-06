@@ -10,15 +10,16 @@ const HomeHero = () => {
   return (
     <Container>
       <div className={styles.hero_wrapper}>
-        <h5>Apakah saya terinfeksi virus corona?</h5>
+        <h5>Lihat daftar ketersedian Rumah Sakit</h5>
         <Grid container spacing={1}>
           <Grid item xs={8} sm={6}>
-            <p>Silahkan periksa kesehatan Anda jika ingin mengetahui kondisi tubuh Anda.</p>
+            <p>Silahkan lihat daftar ketersedian Ruang ICU dan Ruang Isolaasi Rumah Sakit untuk daerah DKI Jakarta.</p>
             <Button 
               size="small" 
               variant="contained"
-              onClick={() => router.push('/diagnosis-page')}>
-            Diagnosa Mandiri</Button>
+              color="primary"
+              onClick={() => router.push('/hospital-list')}>
+            Lihat Daftar Rumah Sakit</Button>
           </Grid>
           <Grid 
             item xs={4} sm={6} container

@@ -128,7 +128,7 @@ const CovidChart = () => {
         </Grid>
         <Grid item xs={6}>
           <Paper elevation={3} className={styles.sembuh_wrap}>
-            <h5>Sembuh</h5>
+            <h5>Vaksinasi Dosis 2</h5>
             {loadingVaccine ? (
               <div className={classes.root}>
                 <CircularProgress />

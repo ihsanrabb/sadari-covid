@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ReferenceHero = (props) => {
   const {
+    imgSource = '/img/location.svg',
     wording = 'Rumah Sakit Rujukan'
   } = props
   const classes = useStyles();
@@ -52,7 +53,11 @@ const ReferenceHero = (props) => {
           <ArrowBackIcon className={classes.extendedIcon} />
           Kembali
         </Fab>
-        <img src="/img/location.svg" alt="protective wear" className={classes.imgHero} />
+        <img 
+          src={imgSource} 
+          alt="protective wear" 
+          className={classes.imgHero} 
+        />
       </Container>
       <div className={classes.wordingHero}>
         <Container>

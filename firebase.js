@@ -1,24 +1,19 @@
 import firebase from 'firebase/app';
-
-import 'firebase/analytics';
 import 'firebase/firestore';
 
 let firebaseConfig = {
-  apiKey: "AIzaSyCizEhc-xO0JZj89Jc7abhkn8_NyezWstg",
-  authDomain: "sadari-covid.firebaseapp.com",
-  databaseURL: "https://sadari-covid.firebaseio.com",
-  projectId: "sadari-covid",
-  storageBucket: "sadari-covid.appspot.com",
-  messagingSenderId: "365726266584",
-  appId: "1:365726266584:web:b4bab5e72e395ce10f13ad",
-  measurementId: "G-T8DLJBPKES"
+  apiKey: `${process.env.REACT_APP_API_KEY}`,
+  authDomain: `${process.env.REACT_APP_AUTH_DOMAIN}`,
+  databaseURL: `${process.env.REACT_APP_DATABASE_URL}`,
+  projectId: `${process.env.REACT_APP_PROJECT_ID}`,
+  storageBucket: `${process.env.REACT_APP_STORAGE_BUCKET}`,
+  messagingSenderId: `${process.env.REACT_APP_SENDER_ID}`,
+  appId: `${process.env.REACT_APP_APP_ID}`,
+  measurementId: `${process.env.REACT_APP_MEASUREMENT_ID}`
 };
 // Initialize Firebase
 
 if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
 }
 export const db = firebase.firestore();
-// firebase.analytics();
-
-// export default fb

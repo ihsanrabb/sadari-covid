@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import axios from 'axios'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles';
@@ -76,12 +76,14 @@ const VaccineLocationList = () => {
   const [districtList, setDistrictList] = useState([])
   const [selectedDistrict, setSelectedDistrict] = useState('')
   const [search, setSearch] = useState('')
+  const [loadingList, setLoadingList] = useState(false)
 
   useEffect(() => {
     initVaccineLocation()
   }, [])
 
   const initVaccineLocation = async() => {
+    setLoadingList(true)
     try {
       const response = await axios.get('https://cors.bridged.cc/https://vaksin-jakarta.yggdrasil.id/')
       const dataLocation = response.data
@@ -93,6 +95,7 @@ const VaccineLocationList = () => {
       }, {})
       setDistrictList(Object.getOwnPropertyNames(groupLocation))
       groupLocationRef.current = groupLocation
+      setLoadingList(false)
     } catch(error) {
       console.log('error get data vaccine location', error)
     }
@@ -104,9 +107,11 @@ const VaccineLocationList = () => {
     setLocationData(groupLocationRef.current[e.target.value])
   }
 
-  const filterVaccineLocation = locationData.filter((hospital) => {
-    return hospital.nama_faskes.toLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
-  });
+  const filterVaccineLocation = useMemo(() => {
+    return locationData.filter((hospital) => {
+      return hospital.nama_faskes.toLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
+    })
+  }, [locationData, search])
 
   return (
     <div className={classes.listWrap}>
@@ -131,7 +136,10 @@ const VaccineLocationList = () => {
           onChange={e => setSearch(e.target.value)} 
           value={search} 
         />
-        {filterVaccineLocation.map((location, index) => (
+        {loadingList ? (
+          <h3>Tunggu sebentar ya...</h3>
+        ) : (
+        filterVaccineLocation.map((location, index) => (
           <Accordion 
             key={location.kode_lokasi_vaksinasi} 
             className={classes.accordionWrap} 
@@ -152,7 +160,7 @@ const VaccineLocationList = () => {
               </Typography>
             </AccordionDetails>
           </Accordion>
-        ))}
+        )))}
       </Container>
     </div>
   )

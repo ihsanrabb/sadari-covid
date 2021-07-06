@@ -6,15 +6,15 @@ import axios from 'axios'
 import utilStyles from '../styles/utilsClass.module.scss'
 
 const HomeHead = () => {
-  const [cityLoc, setCityLoc] = useState('')
+  // const [cityLoc, setCityLoc] = useState('')
 
-  useEffect(() => {
-    let mounted = true
-    if(mounted) {
-      getCoordintes()
-    }
-    return () => mounted = false
-  }, []);
+  // useEffect(() => {
+  //   let mounted = true
+  //   if(mounted) {
+  //     getCoordintes()
+  //   }
+  //   return () => mounted = false
+  // }, []);
 
   function getCoordintes() { 
     let options = { 
@@ -44,7 +44,6 @@ const HomeHead = () => {
     const lng = coordinates[1]
     try {
       const response = await axios.get(`https://us1.locationiq.com/v1/reverse.php?key=71351c589eb051&lat=${lat}&lon=${lng}&format=json`)
-      console.log('res city', response)
       setCityLoc(response.data.display_name)
     } catch(error) {
       console.log('error get city', error)
@@ -55,13 +54,9 @@ const HomeHead = () => {
     <Container>
       <Grid container spacing={1}>
         <Grid item xs={6}>
-          {cityLoc && (
-            <>
-              <h2>Halo!</h2>
-              <LocationOnIcon />
-              <span className={utilStyles.text_10}>{cityLoc}</span>
-            </>
-          )}
+          <h2>Halo!</h2>
+          {/* <LocationOnIcon />
+          <span className={utilStyles.text_10}>{cityLoc}</span> */}
         </Grid>
         <Grid item container xs={6} direction="row" alignItems="center">
           <h3 className={utilStyles.text_right}>Lawan Virus Corona dengan SADARI</h3> 

@@ -15,6 +15,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   listWrap: {
@@ -70,30 +71,6 @@ const useStyles = makeStyles((theme) => ({
   },
   summaryHead: {
     justifyContent: 'space-between'
-  },
-  levelRed: {
-    padding: '.3rem .5rem',
-    borderRadius: '20px',
-    backgroundColor: '#FFA8A7'
-  },
-  levelOrange: {
-    padding: '.3rem .5rem',
-    borderRadius: '20px',
-    backgroundColor: '#F1C796'
-  },
-  levelYellow: {
-    padding: '.3rem .5rem',
-    borderRadius: '20px',
-    backgroundColor: '#FBF7D8'
-  },
-  levelGreen: {
-    padding: '.3rem .5rem',
-    borderRadius: '20px',
-    backgroundColor: '#D1F8D2'
-  },
-  zonaTitle: {
-    margin: '0',
-    fontSize: '12px'
   }
 }))
 
@@ -149,26 +126,26 @@ const ConfirmedList = ({locationData}) => {
   function renderZona(cases) {
     if(cases > 4000) {
       return (
-        <div className={classes.levelRed}>   
-          <p className={classes.zonaTitle}>Zona Merah</p>
+        <div className="level-red">   
+          <p className="title-capsule">Zona Merah</p>
         </div>
       )
     } else if (cases > 3000 && cases < 4000) {
       return (
-        <div className={classes.levelOrange}>   
-          <p className={classes.zonaTitle}>Zona Orange</p>
+        <div className="level-orange">   
+          <p className="title-capsule">Zona Orange</p>
         </div>
       )
     } else if (cases > 2000 && cases < 3000) {
       return (
-        <div className={classes.levelYellow}>   
-          <p className={classes.zonaTitle}>Zona Kuning</p>
+        <div className="level-yellow">   
+          <p className="title-capsule">Zona Kuning</p>
         </div>
       )
     } else {
       return (
-        <div className={classes.levelGreen}>   
-          <p className={classes.zonaTitle}>Zona Hijau</p>
+        <div className="level-green">   
+          <p className="title-capsule">Zona Hijau</p>
         </div>
       )
     }
@@ -202,9 +179,9 @@ const ConfirmedList = ({locationData}) => {
                   <p>{location.provinsi}</p>
                   {renderZona(location.kasusPosi)}
                 </Grid>
-                
               </AccordionSummary>
               <AccordionDetails classes={{root: classes.MuiAccordionDetails}}>
+                <Divider />
                 <ul className={classes.listDetail}>
                   <li>Kasus Positif: {location.kasusPosi}</li>
                   <li>Kasus Sembuh: {location.kasusSemb}</li>
