@@ -5,11 +5,13 @@ import BottomNavigation from '../components/BottomNavigation'
 const HospitalListPage = () => {
   return (
     <>
-      <ReferenceHero 
-        imgSource={'/img/diagnosis-hero.svg'}
-        wording={`Daftar ketersedian Rumah Sakit DKI Jakarta`} 
-      />
-      <HospitalList />
+      <div className="page-width-wrap">
+        <ReferenceHero 
+          imgSource={'/img/diagnosis-hero.svg'}
+          wording={`Daftar ketersedian Rumah Sakit DKI Jakarta`} 
+        />
+        <HospitalList />
+      </div>
       <BottomNavigation />
     </>
   )

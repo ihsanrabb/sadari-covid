@@ -156,9 +156,11 @@ const HospitalList = () => {
         </div>
       )
     } else {
-      <div className="level-red mt-06">   
-        <p className="title-capsule">Ruang Isolasi tidak tersedia</p>
-      </div>
+      return (
+        <div className="level-red mt-06">   
+          <p className="title-capsule">Ruang Isolasi tidak tersedia</p>
+        </div>
+      )
     }
   }
 

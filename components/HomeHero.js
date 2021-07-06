@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 
 const HomeHero = () => {
   const router = useRouter()
-
   return (
     <Container>
       <div className={styles.hero_wrapper}>
@@ -18,15 +17,21 @@ const HomeHero = () => {
               size="small" 
               variant="contained"
               color="primary"
-              onClick={() => router.push('/hospital-list')}>
-            Lihat Daftar Rumah Sakit</Button>
+              onClick={() => router.push('/hospital-list')}
+            >
+             Daftar Rumah Sakit
+            </Button>
           </Grid>
           <Grid 
-            item xs={4} sm={6} container
+            item 
+            xs={4} 
+            sm={6} 
+            container
             direction="row"
             justify="center"
             alignItems="flex-end"
-            className={styles.img_wrap}>
+            className={styles.img_wrap}
+          >
             <img src="/img/protective-wear.svg" alt="protective wear" />
           </Grid>
         </Grid>

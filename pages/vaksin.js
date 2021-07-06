@@ -5,8 +5,10 @@ import BottomNavigation from '../components/BottomNavigation'
 const VaksinPage = () => {
   return (
     <>
-      <ReferenceHero wording={`Lokasi Vaksinasi DKI Jakarta`} />
-      <VaccineLocationList />
+      <div className="page-width-wrap">
+        <ReferenceHero wording={`Lokasi Vaksinasi DKI Jakarta`} />
+        <VaccineLocationList />
+      </div>
       <BottomNavigation className="navigation-bottom" />
     </>
   )

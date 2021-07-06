@@ -8,7 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { makeStyles } from '@material-ui/core/styles'
 import * as dayjs from 'dayjs'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -60,59 +60,56 @@ const CovidChart = () => {
   return (
     <Container>
       <h3>Jumlah COVID-19 di Indonesia</h3>
-      <p>Pembaharuan terakhir {dayjs(lastestUpdate).format('DD MMMM YYYY, HH:mm')}</p>
+      <p>Pembaharuan terakhir {!loading && dayjs(lastestUpdate).format('DD MMMM YYYY, HH:mm')}</p>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Paper elevation={3} className={styles.positif_wrap}>
             <h5>Positif</h5>
-            {loading ? 
-              <>
-                <div className={classes.root}>
-                  <CircularProgress color="secondary"  />
-                </div>
-              </> : 
+            {loading ? (
+              <div className={classes.root}>
+                <CircularProgress color="secondary"  />
+              </div>
+            ) : (
               <>
                 <p>+{filterNumber(updatedCovid.jumlah_positif)}</p>
                 <span>{filterNumber(totalCovid.jumlah_positif)}</span>
               </>
-            }
+            )}
           </Paper>
         </Grid>
         <Grid item xs={4}>
           <Paper elevation={3} className={styles.sembuh_wrap}>
             <h5>Sembuh</h5>
-            {loading ? 
-              <>
-                <div className={classes.root}>
-                  <CircularProgress />
-                </div>
-              </> : 
+            {loading ? (
+              <div className={classes.root}>
+                <CircularProgress />
+              </div>
+            ) : (
               <>
                 <p>+{filterNumber(updatedCovid.jumlah_sembuh)}</p>
                 <span>{filterNumber(totalCovid.jumlah_sembuh)}</span>
               </>
-            }
+            )}
           </Paper>
         </Grid>
         <Grid item xs={4}>
           <Paper elevation={3} className={styles.meninggal_wrap}>
             <h5>Meninggal</h5>
-            {loading ? 
-              <>
-                <div className={classes.root}>
-                  <CircularProgress />
-                </div>
-              </> :
+            {loading ? (
+              <div className={classes.root}>
+                <CircularProgress />
+              </div>
+            ) : (
               <>
                 <p>+{filterNumber(updatedCovid.jumlah_meninggal)}</p>
                 <span>{filterNumber(totalCovid.jumlah_meninggal)}</span>
               </>
-            }
+            )}
           </Paper>
         </Grid>
       </Grid>
       <h3>Jumlah Vaksinasi di indonesia</h3>
-      <p>Pembaharuan terakhir {dayjs(totalVaccine.lastestUpdate).format('DD MMMM YYYY, HH:mm')}</p>
+      <p>Pembaharuan terakhir {!loadingVaccine && dayjs(totalVaccine.lastestUpdate).format('DD MMMM YYYY, HH:mm')}</p>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <Paper elevation={3} className={styles.positif_wrap}>
@@ -122,7 +119,7 @@ const CovidChart = () => {
                 <CircularProgress color="secondary"  />
               </div>
             ) : (
-              <p>{filterNumber(totalVaccine.vaksinasi1)}</p>
+              <p>{filterNumber(totalVaccine.vaksinasi1)} Dosis</p>
             )}
           </Paper>
         </Grid>
@@ -134,7 +131,7 @@ const CovidChart = () => {
                 <CircularProgress />
               </div>
             ) : (
-              <p>{filterNumber(totalVaccine.vaksinasi2)}</p>
+              <p>{filterNumber(totalVaccine.vaksinasi2)} Dosis</p>
             )}
           </Paper>
         </Grid>
