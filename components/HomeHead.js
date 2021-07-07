@@ -6,15 +6,15 @@ import axios from 'axios'
 import utilStyles from '../styles/utilsClass.module.scss'
 
 const HomeHead = () => {
-  const [cityLoc, setCityLoc] = useState('')
+  // const [cityLoc, setCityLoc] = useState('')
 
-  useEffect(() => {
-    let mounted = true
-    if(mounted) {
-      getCoordintes()
-    }
-    return () => mounted = false
-  }, []);
+  // useEffect(() => {
+  //   let mounted = true
+  //   if(mounted) {
+  //     getCoordintes()
+  //   }
+  //   return () => mounted = false
+  // }, []);
 
   function getCoordintes() { 
     let options = { 
