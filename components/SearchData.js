@@ -72,7 +72,8 @@ const categoryNeeds = [
   'Oksigen',
   'Donor Plasma',
   'Ambulans',
-  'Kontak penting'
+  'Kontak penting',
+  'Donasi'
 ];
 
 const initErrors = {provinsi: false, category: false}
@@ -216,10 +217,12 @@ const SearchData = () => {
                   {data.Tautan && (
                     <p><b>Tautan:</b> <a href={data.Tautan} target="_blank">{data.Penyedia}</a></p>
                   )}
-                  <div className="hotline-wrap">
-                    <PhoneIcon />
-                    <a href={`tel:`}> Hubungi : 823921893128</a>
-                  </div>
+                  {data.Kontak && (
+                    <div className="hotline-wrap">
+                      <PhoneIcon />
+                      <a href={`tel:${data.Kontak}`}> Hubungi : {data.Kontak}</a>
+                    </div>
+                  )}
                 </div>
               ))
             ) : (
