@@ -51,17 +51,24 @@ const useStyles = makeStyles((theme) => ({
 const tabWilayah = [
   'Aceh',
   'Sumatera Utara',
-  'Riau',
   'Sumatera Barat',
-  'Lampung',
+  'Banten',
   'DKI Jakarta',
   'Bandar Lampung',
-  'Banten',
-  'Jawa Barat',
   'Jawa Tengah',
+  'Jawa Barat',
   'DI Yogyakarta',
   'Jawa Timur',
   'Bali',
+  'NTT',
+  'NTB',
+  'Bangka Belitung',
+  'Lampung',
+  'Jambi',
+  'Riau',
+  'Kalimantan Timur',
+  'Kalimantan Tengah',
+  'Kalimantan Barat',
   'Sulawesi Utara',
   'Sulawesi Selatan'
 ];
@@ -109,10 +116,13 @@ const SearchData = () => {
 
     setLoadingData(true)
     try {
-      const querySearch = `tabId=${wilayahRef.current.value}&searchKey=Kebutuhan&searchValue=${categoryRef.current.value}`
-      const response = await axios.get(`https://v1.nocodeapi.com/ihsanrabbs/google_sheets/eErlNknWyuAaSpEo/search?${querySearch}`)
-      const dataResult = response.data
-      setDataWarga(dataResult)
+      const endpoint = `https://v1.nocodeapi.com/ihsanrabbs/google_sheets/eErlNknWyuAaSpEo`
+      const response = await axios.get(`${endpoint}?tabId=${wilayahRef.current.value}`)
+      const dataResult = response.data.data
+      const filterData = dataResult.filter((data) => {
+        return data.Kebutuhan.toLowerCase().indexOf(categoryRef.current.value.toLowerCase()) !== -1
+      })
+      setDataWarga(filterData)
       setLoadingData(false)
       setShowResult(true)
     } catch(error) {
