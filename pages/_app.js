@@ -7,7 +7,7 @@ import Head from 'next/head'
 import "nprogress/nprogress.css";
 import Router from 'next/router';
 import NProgress from "nprogress"
-import '../styles/globals.css'
+import '../styles/globals.scss'
 
 Router.onRouteChangeStart = () =>  NProgress.start() 
 Router.onRouteChangeComplete = () => NProgress.done()

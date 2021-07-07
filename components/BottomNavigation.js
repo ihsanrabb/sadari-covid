@@ -5,6 +5,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import LocalHotelIcon from '@material-ui/icons/LocalHotel';
 import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
+import SearchIcon from '@material-ui/icons/Search';
 import { useRouter } from 'next/router'
 
 const useStyles = makeStyles({
@@ -26,7 +27,7 @@ const SimpleBottomNavigation = () => {
       case '/':
         setValue(0)
         break
-      case '/hospital-list':
+      case '/search-information':
         setValue(1)
         break
       case '/vaksin':
@@ -48,9 +49,9 @@ const SimpleBottomNavigation = () => {
         icon={<HomeRoundedIcon />} 
         onClick={() => router.push('/')} />
       <BottomNavigationAction 
-        label="Rumah Sakit" 
-        icon={<LocalHotelIcon />} 
-        onClick={() => router.push('/hospital-list')} />
+        label="Cari Informasi" 
+        icon={<SearchIcon />} 
+        onClick={() => router.push('/search-information')} />
       <BottomNavigationAction 
         label="Lokasi Vaksin" 
         icon={<LocalHospitalIcon />} 

@@ -52,7 +52,7 @@ const HomeNews = () => {
 
   return (
     <Container className={classes.containerNews}>
-      <h3>Informasi Terbaru</h3>
+      <h3>Berita Terbaru</h3>
       {newsList !== [] && 
         <Slider {...settings}>
           {newsList.map((news) => (

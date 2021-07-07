@@ -21,7 +21,8 @@ export default function Home() {
         <CovidChart />
         <HomeInfo />
         <HomeSymptoms />
-        <HomeNews />
+        {/* <HomeNews /> */}
+        <div style={{height: '50px'}}/>
       </div>
       <BottomNavigation className="navigation-bottom" />
     </>

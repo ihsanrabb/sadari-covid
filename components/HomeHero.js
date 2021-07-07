@@ -9,17 +9,17 @@ const HomeHero = () => {
   return (
     <Container>
       <div className={styles.hero_wrapper}>
-        <h5>Lihat daftar ketersedian Rumah Sakit</h5>
+        <h5>Kumpulan Informasi Penting</h5>
         <Grid container spacing={1}>
           <Grid item xs={8} sm={6}>
-            <p>Silahkan lihat daftar ketersedian Ruang ICU dan Ruang Isolaasi Rumah Sakit untuk daerah DKI Jakarta.</p>
+            <p>Mau lihat Informasi Rumah Sakit, Puskesmas, Ambulans, Oksigen, & kontak penting lainnya?</p>
             <Button 
               size="small" 
               variant="contained"
               color="primary"
-              onClick={() => router.push('/hospital-list')}
+              onClick={() => router.push('/search-information')}
             >
-             Daftar Rumah Sakit
+              Klik di sini
             </Button>
           </Grid>
           <Grid 

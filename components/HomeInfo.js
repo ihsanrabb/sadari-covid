@@ -10,7 +10,7 @@ const HomeInfo = () => {
 
   return (
       <Container className={styles.container_wrap}>
-        <h3>Informasi Sekitar Anda</h3>
+        <h3>Informasi Penting</h3>
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Paper 
