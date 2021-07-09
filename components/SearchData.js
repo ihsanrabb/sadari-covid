@@ -48,29 +48,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const tabWilayah = [
+const tabProvinsi = [
+  'Jkt',
   'Aceh',
-  'Sumatera Utara',
-  'Sumatera Barat',
+  'Kep. Riau',
+  'Sumut',
+  'Sumbar',
+  'Sumsel',
+  'Riau',
+  'Bangka Belitung',
+  'Jambi',
+  'Lampung',
   'Banten',
-  'DKI Jakarta',
-  'Bandar Lampung',
-  'Jawa Tengah',
-  'Jawa Barat',
-  'DI Yogyakarta',
-  'Jawa Timur',
+  'Jabar',
+  'Jateng',
+  'Yogya',
+  'Jatim',
   'Bali',
   'NTT',
   'NTB',
-  'Bangka Belitung',
-  'Lampung',
-  'Jambi',
-  'Riau',
-  'Kalimantan Timur',
-  'Kalimantan Tengah',
-  'Kalimantan Barat',
-  'Sulawesi Utara',
-  'Sulawesi Selatan'
+  'Ternate',
+  'Kaltim',
+  'Kalteng',
+  'Kalbar',
+  'Sulses',
+  'Sulteng',
+  'Sulut'
 ];
 
 const categoryNeeds = [
@@ -159,7 +162,7 @@ const SearchData = () => {
                 inputProps={{inputRef: wilayahRef}}
               >
                 <MenuItem value="" disabled>Pilih Provinsi</MenuItem>
-                {tabWilayah.map((item,index) => (
+                {tabProvinsi.map((item,index) => (
                   <MenuItem value={item} key={index}>{item}</MenuItem>
                 ))}
               </Select>
